@@ -1,6 +1,6 @@
 <?php
-require_once 'dbConn.php';
-require_once 'Type_infraction.php';
+require_once './dbConn.php';
+require_once './Type_infraction.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,10 +24,10 @@ class DB_Manag_TypeInfra extends Type_infraction{
             $stmt->execute();
             $retour=$stmt->fetchAll();
             foreach ($retour as $decomp){
-                $id=$decomp[0];
-                $type=$decomp[1];
-                $uniteid= $decomp[2];
-                $typeInfra=new Type_infraction($id, $type, $uniteid);
+                $id_type_infra=$decomp[0];
+                $lbl_type_infra=$decomp[1];
+                $unite_de_compte_id= $decomp[2];
+                $typeInfra=new Type_infraction($id_type_infra, $lbl_type_infra, $unite_de_compte_id);
                 array_push($arrayAllTypeInfra, $typeInfra);
             }
             return($arrayAllTypeInfra);
@@ -46,10 +46,10 @@ class DB_Manag_TypeInfra extends Type_infraction{
             $stmt->execute();
             $retour=$stmt->fetchAll();
             foreach ($retour as $decomp){
-                $id=$decomp[0];
-                $type=$decomp[1];
-                $uniteid= $decomp[2];
-                $typeInfra=new Type_infraction($id, $type, $uniteid);
+                $id_type_infra=$decomp[0];
+                $lbl_type_infra=$decomp[1];
+                $unite_de_compte_id= $decomp[2];
+                $typeInfra=new Type_infraction($id_type_infra, $lbl_type_infra, $unite_de_compte_id);
             }
             return($typeInfra);
             } catch (Exception $ex) {

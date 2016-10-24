@@ -1,6 +1,6 @@
 <?php
-require_once 'dbConn.php';
-require_once 'Ensembe_infraction.php';
+require_once './dbConn.php';
+require_once './Ensembe_infraction.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,17 +14,17 @@ require_once 'Ensembe_infraction.php';
  */
 class DB_Manag_En_Infra extends Ensembe_infraction{
     
-    public static function recup_infraction($idDep, $idInfra, $dateDeb, $dateFin){
+    public static function recup_infraction($id_departement, $id_Infraction, $date_Debut, $date_Fin){
         $arrayInfra[]="";
         try
         {
-            $req="select * from ensemble_infraction where dep_id=:iddep and type_id=:typid and date_infra between :dtdeb and :dtfin;";
+            $req="select * from ensemble_infraction where dep_id=:id_departement and type_id=:typ_infraction_id and date_infra between :date_debut and :date_fin;";
             $connec= dbConn::getConnection();
             $stmt=$connec->prepare($req);
-            $stmt->bindValue('iddep',$idDep , PDO::PARAM_INT);
-            $stmt->bindValue('typid',$idInfra, PDO::PARAM_INT);
-            $stmt->bindValue('dtdeb', $dateDeb,PDO::PARAM_STR);
-            $stmt->bindValue('dtfin', $dateFin, PDO::PARAM_STR);
+            $stmt->bindValue('id_departement',$id_departement , PDO::PARAM_INT);
+            $stmt->bindValue('typ_infraction_id',$id_Infraction, PDO::PARAM_INT);
+            $stmt->bindValue('date_debut', $date_Debut,PDO::PARAM_STR);
+            $stmt->bindValue('date_fin', $date_Fin, PDO::PARAM_STR);
             $stmt->execute();
             $retour=$stmt->fetchAll();
             foreach ($retour as $decomp){
@@ -32,8 +32,8 @@ class DB_Manag_En_Infra extends Ensembe_infraction{
                 $type=$decomp[1];
                 $val= $decomp[2];
                 $dt=$decomp[3];
-                $typeInfra=new Ensembe_infraction($id, $type, $val,$dt);
-                array_push($arrayInfra, $typeInfra);
+                $infraction=new Ensembe_infraction($id, $type, $val,$dt);
+                array_push($arrayInfra, $infraction);
             }
             return($arrayInfra);
             } catch (Exception $ex) {

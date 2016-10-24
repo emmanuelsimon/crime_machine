@@ -15,6 +15,13 @@ if(isset($_GET['mode'])&!empty($_GET['mode']))
             break;
         case 2:
             genererEvenByTypeJSON();
+            break;
+        case 3:
+            genererInfoEvent();
+            break;
+        default;
+            echo("Erreur Switch: Valeur GET invalide");
+            break;
     }
 }
 else
@@ -37,4 +44,11 @@ function genererEvenByTypeJSON()
     $typ=$_GET['id'];
     $arrayEvent = DB_Manag_Evenement::getEveByType($typ);
     echo (json_encode($arrayEvent));
+}
+
+function genererInfoEvent()
+{
+    $id_event=$_GET['id'];
+    $arrayInfos= DB_Manag_Evenement::getInfosEvenById($id_event);
+    echo (json_encode($arrayInfos));
 }

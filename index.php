@@ -4,17 +4,15 @@
     <title>Crime Machine</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" href="src/css/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" href="css/metisMenu.min.css">-->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/morris.css">
+    <link rel="stylesheet" href="Ressources/css/main.css">
+    <link rel="stylesheet" href="Ressources/css/morris.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body onload="inipage()">
     <main>
         <section class='f_row' id="titre">
             <div id="logo">
-                <img src="images/mariannes_logo_seul3-290x258.png" alt=""/>
+                <img src="Ressources/images/mariannes_logo_seul3-290x258.png" alt="logo"/>
             </div>
             <div id="infos">
                 Le fichier ayant servi à ce programme provient du site : <br>
@@ -26,58 +24,70 @@
         <section class="flx_disp_row">
             <div class="flx_disp_col">
                 <div>Date de début</div>
-                <input type="text" id="dtdeb" name="datepicker" value="<?php echo date('YYYY-MM-DD'); ?>" />
+                <input type="text" id="input_date_debut" name="datepicker" value="<?php echo date('YYYY-MM-DD'); ?>" />
                 
             </div>
             <div class="flx_disp_col">
                 <div>Date de fin</div>
-                <input type="date" id="dtfin" name="datepicker" value="<?php echo date('YYYY-MM-DD'); ?>" />
+                <input type="date" id="input_date_fin" name="datepicker" value="<?php echo date('YYYY-MM-DD'); ?>" />
             </div>
             Evènements :<br>
             <div class="flx_disp_col">
-                <div id="listTypeEven" onchange="recupEvent()">Type évènement</div>
-                <div id="listEven"><select id="listEven" size='1'></select></div>
+                <div id="Typ_event">
+                    <select id='list_type_Even' size='1' onchange="recupEvent()"></select>
+                </div>
+                <div>
+                    <select id="listEven" size='1'>
+                        <option>Evénement</option>
+                    </select>
+                    <span class="orange" >Légende : Trait vertical Orange</span>
+                </div>
             </div>
+            <div class="flx_disp_row" id="infosEvent"></div>
         </section>
         <section>
             1er ligne de données dans le graphique :<br>
             <div class="flx_disp_row">
-                <div id="departement1" onchange="selectDep('departement1')">Departement</div>
-                <div id="listinfra1" onchange="selectListInfra('type_infra1','unitecpt1')">Liste infraction</div>
-                <div id="unitecpt1">uc</div>
+                <div id="departement1">
+                    <select id="list_departement1" size='1' onchange="recupDepartement()"></select>
+                </div>
+                <div id="infraction1">
+                    <select id="list_infraction1" list size='1' onchange="selectListInfra('list_infraction1','unite_de_compte1')">
+                    </select>
+                </div>
+                <div id="unite_de_compte1" class="bleue">uc</div>
             </div>
         </section>
         <section>
-            2ème ligne de données dans le graphique :<br>
+            2eme ligne de données dans le graphique :<br>
             <div class="flx_disp_row">
-                <div id="departement2" onchange="selectDep('departement2')">Departement</div>
-                <div id="listinfra2" onchange="selectListInfra('type_infra2','unitecpt2')">Liste infraction</div>
-                <div id="unitecpt2">uc</div>
+                <div class="flx_disp_row">
+                <div id="departement2">
+                    <select id="list_departement2" size='1' onchange="recupDepartement()"></select>
+                </div>
+                <div id="infraction2">
+                    <select id="list_infraction2" list size='1' onchange="selectListInfra('list_infraction2','unite_de_compte2')">
+                    </select>
+                </div>
+                <div id="unite_de_compte2" class="rouge"></div> 
+                </div>
             </div>
         </section>
-        <section>
-
-        </section>        
-        
-        
         <div id="morris-area-chart"></div>
     </main>
     <footer>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <!--<script src="js/metisMenu.min.js"></script>-->
-        <script src="js/raphael.min.js"></script>
-        <script src="js/morris.min.js"></script>
-        <script src="ajax/fonctionsDiverses.js"></script>*
-        <script src="ajax/fct_events.js"></script>
+        <script src="Ressources/js/jquery.min.js"></script>
+        <script src="Ressources/js/bootstrap.min.js"></script>
+        <script src="Ressources/js/raphael.min.js"></script>
+        <script src="Ressources/js/morris.min.js"></script>
+        <script src="ajax/fonctionsDiverses.js"></script>
+        <script src="ajax/ajax_evenement.js"></script>
         <script src="ajax/xhr.js"></script>
-        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-        <!--<script type="text/javascript" src="js/jquery.ui.datepicker-fr.js"></script>-->
         <script type="text/javascript">
         $(document).ready(function(){ 
-            $( "#dtdeb" ).datepicker({dateFormat: "yy-mm-dd"});
-            $( "#dtfin" ).datepicker({dateFormat: "yy-mm-dd"});
+            $( "#input_date_debut" ).datepicker({dateFormat: "yy-mm-dd"});
+            $( "#input_date_fin" ).datepicker({dateFormat: "yy-mm-dd"});
         }); 
         </script>
     </footer>
